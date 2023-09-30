@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: false })); // parse urlencoded request bo
 app.use(cookieParser()); // parse cookies as an object on req.cookies
 
 // Attach Express routers
+app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/tweets', tweetsRouter);
 

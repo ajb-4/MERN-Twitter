@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/api/users');
 const tweetsRouter = require('./routes/api/tweets');
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: false })); // parse urlencoded request bo
 app.use(cookieParser()); // parse cookies as an object on req.cookies
 
 // Attach Express routers
+app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/tweets', tweetsRouter);
 
