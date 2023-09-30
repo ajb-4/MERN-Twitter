@@ -62,6 +62,5 @@ app.use((req, res, next) => {
       statusCode,
       errors: err.errors
     })
-  });
 
 module.exports = app;
