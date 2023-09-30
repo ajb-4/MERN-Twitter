@@ -7,7 +7,7 @@ const cors = require('cors');
 const csurf = require('csurf');
 const { isProduction } = require('./config/keys.js');
 require('./models/User');
-require('./config/passport');
+require('./config/passport'); // <-- ADD THIS LINE
 const passport = require('passport');
 
 const usersRouter = require('./routes/api/users');
@@ -16,14 +16,10 @@ const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
 
-
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(passport.initialize());
 
 // Security Middleware
 if (!isProduction) {
