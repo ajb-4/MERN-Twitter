@@ -4,7 +4,7 @@ const logger = require('morgan');
 
 const cors = require('cors');
 const csurf = require('csurf');
-const { isProduction } = require('./config/keys.js');
+const { isProduction } = require('./config/key');
 
 const usersRouter = require('./routes/api/users');
 const tweetsRouter = require('./routes/api/tweets');

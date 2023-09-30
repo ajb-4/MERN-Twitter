@@ -1,14 +1,14 @@
+
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const cors = require('cors');
 const csurf = require('csurf');
-const { isProduction } = require('./config/keys.js');
+const { isProduction } = require('./config/keys');
 
 const usersRouter = require('./routes/api/users');
 const tweetsRouter = require('./routes/api/tweets');
-const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
 
@@ -40,6 +40,5 @@ app.use(
 // Attach Express routers
 app.use('/api/users', usersRouter);
 app.use('/api/tweets', tweetsRouter);
-app.use('/api/csrf', csrfRouter);
 
 module.exports = app;
