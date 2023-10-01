@@ -16,14 +16,10 @@ const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
 
-
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(passport.initialize());
 
 // Security Middleware
 if (!isProduction) {
