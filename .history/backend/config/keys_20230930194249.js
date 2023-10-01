@@ -1,4 +1,4 @@
-
+const { secretOrKey } = require('./keys');
 
 module.exports = {
   secretOrKey: process.env.SECRET_OR_KEY,

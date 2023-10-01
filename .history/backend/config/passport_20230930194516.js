@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const jwt = require('jsonwebtoken');
 const { secretOrKey } = require('./keys');
-const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 
 passport.use(new LocalStrategy({
     session: false,
@@ -22,25 +21,6 @@ passport.use(new LocalStrategy({
       done(null, false);
   }));
 
-  const options = {};
-options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-options.secretOrKey = secretOrKey;
-
-passport.use(new JwtStrategy(options, async (jwtPayload, done) => {
-  try {
-    const user = await User.findById(jwtPayload._id)
-    if (user) {
-      // return the user to the frontend
-      return done(null, user);
-    }
-    // return false since there is no user
-    return done(null, false);
-  }
-  catch(err) {
-    done(err);
-  }
-}));
-
   exports.loginUser = async function(user) {
     const userInfo = {
       _id: user._id,
@@ -56,14 +36,4 @@ passport.use(new JwtStrategy(options, async (jwtPayload, done) => {
       user: userInfo,
       token
     };
-  };
-
-  exports.requireUser = passport.authenticate('jwt', { session: false });
-
-  exports.restoreUser = (req, res, next) => {
-    return passport.authenticate('jwt', { session: false }, function(err, user) {
-      if (err) return next(err);
-      if (user) req.user = user;
-      next();
-    })(req, res, next);
   };
